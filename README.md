@@ -1,4 +1,4 @@
-# SpringBoot-Microservices-Docker-Example
+# SpringBoot-Microservices-OAuth2-Docker-Example
 This is an example of creating microservices by using SpringBoot, Spring Cloud Gateway, Spring Cloud Eureka Discovery Server, Cloud Foundry UAA OAuth2 Server, PostgreSQL and Docker-Compose
 
 
