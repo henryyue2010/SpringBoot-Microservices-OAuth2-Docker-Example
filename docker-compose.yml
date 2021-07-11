@@ -1,0 +1,59 @@
+version: '3'
+services:
+      
+   uaa:
+     build: ./uaa-server
+     container_name: uaa
+     depends_on:
+          - db
+     expose:
+       - "8090"
+     ports:
+       - "8090:8090"
+      
+   eureka-discovery:
+     build: ./eureka-discovery
+     container_name: eureka-discovery
+     depends_on:
+          - db
+     ports:
+         - "8083:8083"
+
+   first-service:
+     build: ./first-service
+     container_name: first-service
+     depends_on:
+          - db
+          - eureka-discovery
+     ports:
+          - "9090:9090"    
+          
+   second-service:
+     build: ./second-service
+     container_name: second-service
+     depends_on:
+          - db
+          - eureka-discovery
+     ports:
+          - "9092:9092"   
+   
+   api-gateway:
+     build: ./api-gateway
+     container_name: gateway
+     depends_on:
+          - db
+          - eureka-discovery
+          - uaa
+          - first-service
+          - second-service
+     ports: 
+         - "8080:8080"       
+                  
+   db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres      

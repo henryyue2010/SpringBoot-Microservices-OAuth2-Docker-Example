@@ -1,0 +1,7 @@
+
+rootProject.name = 'springboot-microservices-docker-example'
+include 'eureka-discovery'
+include 'api-gateway'
+include 'first-service'
+include 'second-service'
+include 'uaa-server'

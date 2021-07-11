@@ -1,0 +1,14 @@
+version = '0.0.1-SNAPSHOT'
+
+allprojects {
+  repositories {
+    mavenCentral()
+
+    group = 'springboot-microservices-docker-example'
+  }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+}

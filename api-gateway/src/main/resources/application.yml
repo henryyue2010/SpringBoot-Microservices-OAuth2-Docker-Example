@@ -1,0 +1,37 @@
+server:
+  port: 8080
+ 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-discovery:8083/eureka 
+
+
+
+
+spring: 
+  application:
+    name: api-gateway
+  autoconfigure: 
+    exclude: org.springframework.boot.actuate.autoconfigure.security.reactive.ReactiveManagementWebSecurityAutoConfiguration
+  security: 
+    oauth2: 
+      client: 
+        registration:
+          gateway:
+            provider: uaa
+            client-id: gateway
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: openid,profile,email,resource.read
+        provider:
+          uaa:
+            authorization-uri: http://localhost:8090/uaa/oauth/authorize
+            token-uri: http://uaa:8090/uaa/oauth/token
+            user-info-uri: http://uaa:8090/uaa/userinfo
+            user-name-attribute: sub
+            jwk-set-uri: http://uaa:8090/uaa/token_keys
+  thymeleaf: 
+    cache: false
+      
